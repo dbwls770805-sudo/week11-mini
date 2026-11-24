@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>김유진 | Profile</title>
+  <style>
+    :root {
+      --paper: #f3edda;
+      --paper-light: #faf7ea;
+      --orange: #c96f3d;
+      --orange-dark: #87452b;
+      --green: #78845a;
+      --green-dark: #4e5638;
+      --ink: #38372f;
+      --line: #d4cda9;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      height: auto;
+      padding: 0;
+      background:
+        linear-gradient(180deg, rgba(20, 89, 138, .05), rgba(16, 61, 97, .28)),
+        url("https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1920&q=90") center 52% / cover fixed;
+      font-family: "Pretendard", "Malgun Gothic", sans-serif;
+    }
+
+    body::before,
+    body::after { display: none; }
+
+    .page { display: none !important; }
+
+    .travel-site {
+      position: relative;
+      width: 100%;
+      min-height: 1450px;
+      overflow: hidden;
+      color: #effaff;
+      background: linear-gradient(180deg, rgba(25, 111, 170, .08), rgba(5, 49, 82, .16));
+    }
+
+    .travel-site::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background:
+        radial-gradient(circle at 22% 68%, rgba(255, 255, 255, .16) 0 1px, transparent 2px),
+        linear-gradient(115deg, transparent 12%, rgba(207, 238, 248, .09) 32%, transparent 48%);
+      background-size: 23px 23px, 100% 100%;
+      animation: skyMove 18s linear infinite;
+    }
+
+    @keyframes skyMove {
+      to { background-position: 120px 40px, 100% 100%; }
+    }
+
+    .travel-site::after {
+      content: "✈";
+      position: absolute;
+      z-index: 1;
+      top: 125px;
+      left: -120px;
+      color: rgba(255, 255, 255, .78);
+      font-family: Arial, sans-serif;
+      font-size: clamp(46px, 7vw, 84px);
+      text-shadow: 0 8px 18px rgba(5, 49, 82, .32);
+      transform: rotate(-8deg);
+      animation: crossSky 18s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes crossSky {
+      0% { left: -140px; top: 150px; opacity: 0; }
+      12% { opacity: .9; }
+      88% { opacity: .9; }
+      100% { left: calc(100% + 140px); top: 65px; opacity: 0; }
+    }
+
+    .topbar {
+      position: relative;
+      z-index: 5;
+      height: 74px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      padding: 0 clamp(24px, 5vw, 82px);
+      border-bottom: 1px solid rgba(255, 255, 255, .1);
+      background: rgba(27, 94, 145, .16);
+      backdrop-filter: blur(8px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: Georgia, serif;
+      font-size: 21px;
+      font-weight: 700;
+      justify-self: start;
+    }
+
+    .brand > span:last-child { display: none; }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, .58);
+      border-radius: 50%;
+      background: rgba(238, 244, 219, .16);
+      animation: planeFloat 3.8s ease-in-out infinite;
+    }
+
+    @keyframes planeFloat {
+      50% { transform: translateY(-5px) rotate(-4deg); }
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      font-size: 13px;
+      font-weight: 700;
+      justify-self: end;
+    }
+
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      opacity: .82;
+    }
+
+    .nav-links a:first-child { opacity: 1; }
+
+    .nav-links .ko {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #eef4db;
+      color: #174c70;
+    }
+
+    .journal {
+      position: relative;
+      z-index: 2;
+      width: min(1180px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 70px 0 70px;
+    }
+
+    .kicker {
+      margin: 0 0 8px;
+      color: #dceec1;
+      font-family: "Courier New", monospace;
+      font-size: 12px;
+      letter-spacing: 4px;
+    }
+
+    .hero-title {
+      margin: 0;
+      font-family: Georgia, "Noto Serif KR", serif;
+      font-size: clamp(58px, 8vw, 92px);
+      font-weight: 400;
+      letter-spacing: -5px;
+      line-height: 1;
+      text-shadow: 0 3px 18px rgba(6, 47, 75, .32);
+    }
+
+    .hero-title em { color: #e9efaa; font-style: italic; }
+
+    .tagline {
+      margin: 16px 0 32px;
+      font-size: 16px;
+      color: rgba(255, 255, 255, .88);
+    }
+
+    .dashboard {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 16px;
+    }
+
+    .glass {
+      border: 1px solid rgba(255, 255, 255, .14);
+      border-radius: 22px;
+      background: rgba(16, 80, 125, .48);
+      box-shadow: 0 18px 50px rgba(6, 48, 79, .12);
+      backdrop-filter: blur(14px);
+    }
+
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .profile-card,
+    .side-card {
+      min-height: 220px;
+      padding: 28px;
+    }
+
+    .profile-card {
+      border-left: 3px solid #bcd78f;
+    }
+
+    .card-label {
+      margin: 0 0 16px;
+      color: #c8e4a1;
+      font-family: "Courier New", monospace;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .profile-card h2 {
+      margin: 0;
+      font-family: Georgia, "Noto Serif KR", serif;
+      font-size: 34px;
+    }
+
+    .profile-card p,
+    .side-card p {
+      margin: 10px 0 0;
+      line-height: 1.7;
+    }
+
+    .favorites {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .favorite-chip {
+      padding: 12px;
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, .07);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .favorite-chip span { margin-right: 7px; }
+
+    .hobbies {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      grid-column: 1 / -1;
+    }
+
+    .hobby-card {
+      min-height: 118px;
+      padding: 20px;
+      transition: .25s ease;
+    }
+
+    .hobby-card:hover {
+      transform: translateY(-6px);
+      background: rgba(26, 95, 137, .64);
+    }
+
+    .hobby-card b {
+      display: block;
+      margin: 10px 0 4px;
+      font-size: 16px;
+    }
+
+    .hobby-card small {
+      display: block;
+      margin-top: 8px;
+      color: #d4e4df;
+      font-family: "Courier New", monospace;
+      line-height: 1.6;
+    }
+
+    .route {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 20px;
+      color: #ecf8ca;
+      font-family: "Courier New", monospace;
+      font-size: 12px;
+    }
+
+    .route i {
+      flex: 1;
+      height: 1px;
+      background: repeating-linear-gradient(90deg, rgba(236, 248, 202, .8) 0 5px, transparent 5px 10px);
+    }
+
+    .journal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .story-card { padding: 28px; }
+
+    .story-card h2 {
+      margin: 0 0 14px;
+      font-family: Georgia, "Noto Serif KR", serif;
+      font-size: 30px;
+      font-weight: 400;
+    }
+
+    .trait-list,
+    .goal-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .trait-list div,
+    .goal-list div {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+      font-size: 14px;
+    }
+
+    .trait-list b,
+    .goal-list b { color: #dceaa8; }
+
+    .memory-strip {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 2px;
+    }
+
+    .memory {
+      min-height: 150px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      background:
+        linear-gradient(180deg, rgba(8, 67, 108, .05), rgba(8, 67, 108, .72)),
+        var(--memory-image) center / cover;
+    }
+
+    .memory:nth-child(1) { --memory-image: url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"); }
+    .memory:nth-child(2) { --memory-image: url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&q=80"); }
+    .memory:nth-child(3) { --memory-image: url("https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=600&q=80"); }
+    .memory:nth-child(4) { --memory-image: url("https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=600&q=80"); }
+
+    .memory span {
+      font-family: "Courier New", monospace;
+      font-size: 11px;
+      letter-spacing: 2px;
+    }
+
+    .memory b { margin-top: 6px; }
+
+    .destination-grid {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      padding: 24px;
+    }
+
+    .destination-grid::before {
+      content: "06 · Travel Wishlist";
+      grid-column: 1 / -1;
+      color: #c8e4a1;
+      font-family: "Courier New", monospace;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .destination {
+      min-height: 145px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 18px;
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, .07);
+    }
+
+    .destination span {
+      font-family: "Courier New", monospace;
+      color: #dceaa8;
+      font-size: 11px;
+      letter-spacing: 2px;
+    }
+
+    .destination b {
+      font-family: Georgia, "Noto Serif KR", serif;
+      font-size: 24px;
+      font-weight: 400;
+    }
+
+    @media (max-width: 820px) {
+      .topbar { height: 64px; padding: 0 20px; }
+      .nav-links a { display: none; }
+      .journal { width: calc(100% - 32px); padding-top: 38px; }
+      .dashboard, .profile-grid, .journal-grid { grid-template-columns: 1fr; }
+      .favorites { grid-template-columns: repeat(2, 1fr); }
+      .memory-strip { grid-template-columns: 1fr 1fr; }
+      .destination-grid { grid-template-columns: 1fr 1fr; }
+      .travel-site { min-height: 2100px; }
+      .hobbies { grid-template-columns: 1fr; }
+      .hero-title { letter-spacing: -3px; }
+      .profile-card, .side-card { min-height: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="travel-site">
+    <nav class="topbar" aria-label="주요 메뉴">
+      <div class="brand">
+        <span class="brand-mark">✈</span>
+      </div>
+      <div class="nav-links">
+        <a href="#profile">프로필</a>
+        <a href="#favorites">취향</a>
+        <a href="#hobbies">취미</a>
+        <span class="ko">KO</span>
+      </div>
+    </nav>
+
+    <main class="journal">
+      <p class="kicker">TRAVEL &amp; PERSONAL ARCHIVE</p>
+      <h1 class="hero-title">김<em>유진</em></h1>
+      <p class="tagline">경영정보학과 · 일상의 여정을 기록하는 사람</p>
+
+      <div class="dashboard">
+        <div class="profile-grid">
+          <section class="glass profile-card" id="profile">
+            <p class="card-label">01 · Profile</p>
+            <h2>안녕하세요.</h2>
+            <p>경영정보학과에서 배우고 있으며, 새로운 곳과 새로운 취향을 발견하는 시간을 좋아합니다.</p>
+            <div class="route"><span>DAEJEON</span><i></i><span>JOURNEY</span></div>
+          </section>
+
+          <section class="glass side-card" id="favorites">
+            <p class="card-label">02 · Favorites</p>
+            <div class="favorites">
+              <div class="favorite-chip"><span>🐕</span>강아지</div>
+              <div class="favorite-chip"><span>🌶️</span>불닭</div>
+              <div class="favorite-chip"><span>🧇</span>와플</div>
+              <div class="favorite-chip"><span>🥩</span>고기</div>
+              <div class="favorite-chip"><span>🌊</span>바다 산책</div>
+              <div class="favorite-chip"><span>✈️</span>여행</div>
+              <div class="favorite-chip"><span>🧸</span>몬치치</div>
+              <div class="favorite-chip"><span>🐰</span>치이카와</div>
+              <div class="favorite-chip"><span>🎀</span>인형</div>
+            </div>
+          </section>
+        </div>
+
+        <section class="glass side-card">
+          <p class="card-label">03 · Today</p>
+          <h2 style="margin:0;font-family:Georgia,'Noto Serif KR',serif;font-size:30px;font-weight:400;">일상 속 작은 여행</h2>
+          <p>노래를 들으며 머무를 곳을 상상하고, 사진으로 순간을 남깁니다.</p>
+          <div class="route"><span>TAKE A PHOTO</span><i></i><span>PRESS SHUTTER</span></div>
+        </section>
+
+        <section class="hobbies" id="hobbies">
+          <article class="glass hobby-card">
+            <span>🎧</span>
+            <b>노래 듣기</b>
+            <small>Like I Do · J.Tajor</small>
+          </article>
+          <article class="glass hobby-card">
+            <span>🎬</span>
+            <b>공포영화 보기</b>
+            <small>NIGHT / MOVIE</small>
+          </article>
+          <article class="glass hobby-card">
+            <span>📷</span>
+            <b>사진 찍기</b>
+            <small>스냅 · 풍경</small>
+          </article>
+        </section>
+
+        <section class="journal-grid">
+          <article class="glass story-card">
+            <p class="card-label">04 · Character</p>
+            <h2>나를 색으로 표현하면?</h2>
+            <div class="trait-list">
+              <div><span>기분</span><b>은은한 연두빛</b></div>
+              <div><span>성향</span><b>호기심 많은 탐험가</b></div>
+              <div><span>추억 방식</span><b>사진과 음악으로 기록</b></div>
+              <div><span>좋아하는 시간</span><b>노을이 질 때</b></div>
+            </div>
+          </article>
+          <article class="glass story-card">
+            <p class="card-label">05 · Next Stops</p>
+            <h2>앞으로의 작은 계획</h2>
+            <div class="goal-list">
+              <div><span>01</span><b>알록달록한 풍경 촬영하기</b></div>
+              <div><span>02</span><b>강아지와 산책 코스 찾기</b></div>
+              <div><span>03</span><b>공포영화 명작 감상하기</b></div>
+              <div><span>04</span><b>맛있는 고기 맛집 기록하기</b></div>
+            </div>
+          </article>
+          <div class="memory-strip" aria-label="여행 분위기 기록">
+            <article class="glass memory"><span>SEA</span><b>푸른 바람</b></article>
+            <article class="glass memory"><span>ROAD</span><b>낯선 길</b></article>
+            <article class="glass memory"><span>LAKE</span><b>고요한 오후</b></article>
+            <article class="glass memory"><span>MOUNTAIN</span><b>새로운 전망</b></article>
+          </div>
+          <div class="glass destination-grid">
+            <article class="destination"><span>NORTH 01</span><b>스웨덴</b></article>
+            <article class="destination"><span>NORTH 02</span><b>캐나다</b></article>
+            <article class="destination"><span>EUROPE 03</span><b>포르투갈</b></article>
+            <article class="destination"><span>EUROPE 04</span><b>스페인</b></article>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <article class="page">
+    <header>
+      <div>
+        <p class="edition">Personal Archive · 2026</p>
+        <h1>김<em>유진</em></h1>
+        <p class="major">경영정보학과 · 소확행 수집가</p>
+      </div>
+      <div class="portrait" aria-label="강아지 프로필">
+        <span class="dog">🐶</span>
+      </div>
+    </header>
+
+    <main>
+      <div class="left-column">
+        <section>
+          <h2>About Me</h2>
+          <p class="about">
+            안녕하세요, <strong>김유진</strong>입니다.<br>
+            경영정보학과에서 공부하며, 일상 속에서 따뜻한 순간과 새로운 취향을 기록하고 있습니다.
+          </p>
+        </section>
+
+        <section>
+          <h2>Favorites</h2>
+          <div class="favorites">
+            <div class="favorite">
+              <span class="icon">🐕</span>
+              <span><b>ANIMAL</b><span>강아지</span></span>
+            </div>
+            <div class="favorite">
+              <span class="icon">🌶️</span>
+              <span><b>SPICY</b><span>불닭</span></span>
+            </div>
+            <div class="favorite">
+              <span class="icon">🧇</span>
+              <span><b>SWEET</b><span>와플</span></span>
+            </div>
+            <div class="favorite">
+              <span class="icon">🥩</span>
+              <span><b>TABLE</b><span>고기</span></span>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="right-column">
+        <section>
+          <h2>Hobbies</h2>
+          <div class="hobbies">
+            <div class="hobby">
+              <span class="number">01</span>
+              <span>
+                <strong>노래 듣기</strong>
+                <small>MUSIC &amp; DAILY RHYTHM</small>
+              </span>
+            </div>
+            <div class="hobby">
+              <span class="number">02</span>
+              <span>
+                <strong>공포영화 보기</strong>
+                <small>LIGHTS OFF · NIGHT MOVIE</small>
+              </span>
+            </div>
+            <div class="hobby">
+              <span class="number">03</span>
+              <span>
+                <strong>사진 찍기</strong>
+                <small>DAILY LIGHT · SMALL MOMENTS</small>
+              </span>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2>Small Things</h2>
+          <div class="mood">
+            <p>“좋아하는 것들과 함께하는<br>느린 여름 오후를 좋아해요.”</p>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <div class="botanical top-right" aria-hidden="true"></div>
+    <div class="archive-stamp" aria-hidden="true">
+      <strong>Personal Archive</strong>
+      <br>김유진의 소중한 기록
+    </div>
+  </article>
+</body>
+</html>
